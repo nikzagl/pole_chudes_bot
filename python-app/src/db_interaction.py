@@ -1,4 +1,4 @@
-import asyncpg
+Iimport asyncpg
 import os
 
 pg_user=os.environ["POSTGRES_USER"]
@@ -16,7 +16,7 @@ async def update_user(username: str, user_id: str, score: int) -> None:
     await conn.close()
 
 async def get_scores() -> list[tuple]:
-    conn = await asyncpg.connect(host = "database", port=5432, user="docker", database="docker", password="pass")
+    conn = await asyncpg.connect(host = pg_database, port=5432, user=pg_user, database=pg_database, password=pg_password)
     table = await conn.fetch("SELECT * FROM scores ORDER BY score DESC")
     await conn.close()
     return table
